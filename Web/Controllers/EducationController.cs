@@ -9,7 +9,6 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
-    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EducationController : ControllerBase
