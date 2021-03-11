@@ -15,19 +15,21 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Web.Http.Filters;
+using Web.ActionFilters;
 using Web.AutoMapper;
 using Web.ViewModels;
+using Web.ViewModels.User;
 
 namespace Web
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -56,7 +58,12 @@ namespace Web
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
                 };
             });
-
+            //Add action filter
+            services.AddScoped<ValidationFilterAttribute>();
+            //services.AddControllers(config =>
+            //{
+            //    config.Filters.Add(new ActionFilterAttribute());
+            //});
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

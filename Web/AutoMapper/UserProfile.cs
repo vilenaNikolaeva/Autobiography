@@ -11,6 +11,8 @@ namespace Web.AutoMapper
         {
             CreateMap<CreateUserViewModel, User>();
             CreateMap<User, CreateUserViewModel>();
+            CreateMap<User, UpdateUserViewModel>();
+            CreateMap<UpdateUserViewModel, User>();
 
         }
     }

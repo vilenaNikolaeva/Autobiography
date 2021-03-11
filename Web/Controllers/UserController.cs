@@ -4,15 +4,15 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Web.ActionFilters;
 using Web.ViewModels;
 
 namespace Web.Controllers
 {
-   // [Authorize]
+    [Authorize]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -23,7 +23,7 @@ namespace Web.Controllers
         {
             this.userService = userService;
             this.mapper = mapper;
-        }                 
+        }
 
         [HttpGet]
         [Route("{id}/languages")]
@@ -31,9 +31,6 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetLanguagesByUserIdAsync(string id)
         {
-        //    if (this.User.FindFirst("UserId").Value == id) { }
-
-            //TODO check  if the user exist.
             var languages = await this.userService.GetLanguagesByUserIdAsync(id);
             var languageModel = this.mapper.Map<IList<LanguageViewModel>>(languages);
 
@@ -46,7 +43,6 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetSkillsByUserIdAsync(string id)
         {
-            //TODO check  if the user exist.
             var skills = await this.userService.GetSkillByUserIdAsync(id);
             var skillModel = this.mapper.Map<IList<CreateSkillViewModel>>(skills);
             return Ok(skillModel);
@@ -58,7 +54,6 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetExperiencesByUserIdAsync(string id)
         {
-            //TODO check  if the user exist.
             var experiences = await this.userService.GetExperienceByUserIdAsync(id);
             var experienceModel = this.mapper.Map<IList<CreateExperienceViewModel>>(experiences);
             return Ok(experienceModel);
@@ -70,7 +65,6 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetEducationByUserIdAsync(string id)
         {
-            //TODO check  if the user exist.
             var educations = await this.userService.GetEducationByUserIdAsync(id);
             var educationModel = this.mapper.Map<IList<CreateEducationViewModel>>(educations);
             return Ok(educationModel);
@@ -80,12 +74,8 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<int>> DeleteUserByIdAsync(string id)
+        public async Task<ActionResult> DeleteUserByIdAsync(string id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             await this.userService.DeleteUserByIdAsync(id);
             return Ok();
         }
@@ -94,13 +84,14 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<int>> UpdateUserByIdAsync(string id, User user)
+        public async Task<ActionResult> UpdateUserByIdAsync(string id, UpdateUserViewModel user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            await this.userService.UpdateUserByIdAsync(id, user);
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            var userModel = this.mapper.Map<User>(user);
+            await this.userService.UpdateUserByIdAsync(id, userModel);
             return Ok();
         }
     }

@@ -15,6 +15,11 @@ namespace Autobiography.Data.Repositories
             : base(context)
         {
         }
+        public async Task<User> FindByIdAsync(string id)
+        {
+            return await this.context.Users.FindAsync(id);
+        }
+
 
         public async Task<User> CreateUserAsync(User newUser)
         {
@@ -22,47 +27,47 @@ namespace Autobiography.Data.Repositories
             await this.context.SaveChangesAsync();
             return newUser;
         }
-
-        public async Task DeleteUserByIdAsync(string id)
+        public async Task<IList<Education>> GetEducationByUserIdAsync(string id)
         {
-            var user =await this.context.Users.SingleOrDefaultAsync(u => u.Id == id);
-            this.context.Users.Remove(user);
-            await this.context.SaveChangesAsync();
-        }
-
-        public async  Task<IList<Education>> GetEducationByUserIdAsync(string id)
-        {
-            var user = await this.context.Users.Include(u => u.Educations).FirstOrDefaultAsync(l => l.Id == id);
-            var educations = user.Educations.ToList();
+            var educations = await this.context.Educations.Where(e => e.UserId == id).ToListAsync();
             return educations;
         }
 
         public async Task<IList<Experience>> GetExperienceByUserIdAsync(string id)
         {
-            var user = await this.context.Users.Include(u => u.Experiences).FirstOrDefaultAsync(l => l.Id == id);
-            var experiences = user.Experiences.ToList();
+            var experiences = await this.context.Experiences.Where(e => e.UserId == id).ToListAsync();
             return experiences;
         }
 
         public async Task<IList<Language>> GetLanguagesByUserIdAsync(string id)
         {
-            var user = await this.context.Users.Include(u => u.Languages).FirstOrDefaultAsync(l => l.Id == id);
-            var language = user.Languages.ToList();
-            return language;
+            var languages = await this.context.Languages.Where(l => l.UserId == id).ToListAsync();
+            return languages;
         }
         public async Task<IList<Skill>> GetSkillByUserIdAsync(string id)
         {
-            var skill = await this.context.Users.Include(u => u.Skills).FirstOrDefaultAsync(skill => skill.Id == id);
-            var skills = skill.Skills.ToList();
+            var skills = await this.context.Skills.Where(s => s.UserId == id).ToListAsync();
             return skills;
         }
 
-        public async Task<User> UpdateUserByIdAsync(string id,User user)
+        public async Task<User> UpdateUserAsync(string id, User user)
         {
-            user.Id = id;
-            this.context.Users.Update(user);
+            var userForUpdate = await this.FindByIdAsync(id);
+
+            userForUpdate.UserName = user.UserName;
+            userForUpdate.Email = user.Email;
+            userForUpdate.Address = user.Address;
+            userForUpdate.Description = user.Description;
+
+            this.context.Users.Update(userForUpdate);
             await this.context.SaveChangesAsync();
-            return user;
+            return userForUpdate;
+        }
+        public async Task DeleteUserAsync(string id)
+        {
+            var user = await this.FindByIdAsync(id);
+            this.context.Users.Remove(user);
+            await this.context.SaveChangesAsync();
         }
     }
 }

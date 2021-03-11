@@ -25,7 +25,7 @@ namespace Autobiography.Services
 
         public async Task DeleteUserByIdAsync(string id)
         {
-            await this.userRepository.DeleteUserByIdAsync(id);
+            await this.userRepository.DeleteUserAsync(id);
         }
 
         public async Task<IList<Education>> GetEducationByUserIdAsync(string id)
@@ -54,7 +54,7 @@ namespace Autobiography.Services
 
         public async Task<User> UpdateUserByIdAsync(string id, User user)
         {
-           var updatedUser= await this.userRepository.UpdateUserByIdAsync(id, user);
+           var updatedUser= await this.userRepository.UpdateUserAsync(id, user);
             return updatedUser;
         }
     }

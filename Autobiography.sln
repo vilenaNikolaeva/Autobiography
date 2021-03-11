@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{12716DFE-C47A-4B99-A866-4F018B569FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobiography.Services", "Autobiography.Services\Autobiography.Services.csproj", "{9B843057-FA32-49C3-A85D-E8F7014A1F64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobiography.Services", "Autobiography.Services\Autobiography.Services.csproj", "{9B843057-FA32-49C3-A85D-E8F7014A1F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobiography.Domain", "Autobiography.Domain\Autobiography.Domain.csproj", "{C14211A1-60EA-45EE-9786-AF936852C5F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobiography.Domain", "Autobiography.Domain\Autobiography.Domain.csproj", "{C14211A1-60EA-45EE-9786-AF936852C5F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobiography.Data", "Autobiography.Data\Autobiography.Data.csproj", "{26286612-96CA-4781-8FBB-38016FF63450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobiography.Data", "Autobiography.Data\Autobiography.Data.csproj", "{26286612-96CA-4781-8FBB-38016FF63450}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

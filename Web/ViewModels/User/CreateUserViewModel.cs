@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace Web.ViewModels
 {
-    public class CreateUserViewModel :IdentityRole
+    public class CreateUserViewModel 
     {
-      //  public int Id { get; set; }
         [Required(ErrorMessage = "Required name")]
         [MaxLength(50, ErrorMessage = "Max Length 50")]
-        //public string Name { get; set; }
+        public string Username { get; set; }
         public string Address { get; set; }
         [Required(ErrorMessage = "Required email")]
         [EmailAddress]
