@@ -26,6 +26,19 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> GetUserInfoById(string id)
+        {
+            var userInfo = await this.userService.GetUserInfoById(id);
+            var userInfoModel = this.mapper.Map<IList<CreateUserViewModel>>(userInfo);
+
+            return Ok(userInfoModel);
+        }
+
+
+        [HttpGet]
         [Route("{id}/languages")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -44,7 +57,7 @@ namespace Web.Controllers
         public async Task<ActionResult> GetSkillsByUserIdAsync(string id)
         {
             var skills = await this.userService.GetSkillByUserIdAsync(id);
-            var skillModel = this.mapper.Map<IList<CreateSkillViewModel>>(skills);
+            var skillModel = this.mapper.Map<IList<SkillViewModel>>(skills);
             return Ok(skillModel);
         }
 
@@ -55,7 +68,7 @@ namespace Web.Controllers
         public async Task<ActionResult> GetExperiencesByUserIdAsync(string id)
         {
             var experiences = await this.userService.GetExperienceByUserIdAsync(id);
-            var experienceModel = this.mapper.Map<IList<CreateExperienceViewModel>>(experiences);
+            var experienceModel = this.mapper.Map<IList<ExperienceViewModel>>(experiences);
             return Ok(experienceModel);
         }
 
@@ -66,7 +79,7 @@ namespace Web.Controllers
         public async Task<ActionResult> GetEducationByUserIdAsync(string id)
         {
             var educations = await this.userService.GetEducationByUserIdAsync(id);
-            var educationModel = this.mapper.Map<IList<CreateEducationViewModel>>(educations);
+            var educationModel = this.mapper.Map<IList<EducationViewModel>>(educations);
             return Ok(educationModel);
         }
 

@@ -14,7 +14,6 @@ using Web.ViewModels;
 namespace Web.Controllers
 {
     [Authorize]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class SkillController : ControllerBase
@@ -44,7 +43,7 @@ namespace Web.Controllers
 
             return Ok(skillView);
         }
-
+        
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

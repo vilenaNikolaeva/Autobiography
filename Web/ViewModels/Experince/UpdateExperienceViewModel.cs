@@ -9,7 +9,11 @@ namespace Web.ViewModels
     public class UpdateExperienceViewModel
     {
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
         [Required]
         [MaxLength(200)]

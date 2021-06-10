@@ -40,10 +40,13 @@ namespace Autobiography.Data.Repositories
             var skillForUpdate = await this.FindByIdAsync(id);
 
             skillForUpdate.Title = skill.Title;
+            skillForUpdate.Level = skill.Level;
 
             this.context.Skills.Update(skillForUpdate);
             await this.context.SaveChangesAsync();
             return skillForUpdate;
         }
+
+      
     }
 }

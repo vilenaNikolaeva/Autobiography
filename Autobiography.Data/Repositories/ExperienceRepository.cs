@@ -41,7 +41,7 @@ namespace Autobiography.Data.Repositories
            
             experienceForUpdate.CompanyName = experience.CompanyName;
             experienceForUpdate.Description = experience.Description;
-            experienceForUpdate.StartDate = experience.StartDate;
+            experienceForUpdate.StartDate =experience.StartDate;
             experienceForUpdate.EndDate = experience.EndDate;
 
             this.context.Experiences.Update(experienceForUpdate);

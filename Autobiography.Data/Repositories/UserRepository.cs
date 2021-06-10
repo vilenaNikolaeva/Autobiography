@@ -56,6 +56,7 @@ namespace Autobiography.Data.Repositories
 
             userForUpdate.UserName = user.UserName;
             userForUpdate.Email = user.Email;
+            userForUpdate.Link = user.Link;
             userForUpdate.Address = user.Address;
             userForUpdate.Description = user.Description;
 
@@ -68,6 +69,13 @@ namespace Autobiography.Data.Repositories
             var user = await this.FindByIdAsync(id);
             this.context.Users.Remove(user);
             await this.context.SaveChangesAsync();
+        }
+
+        public async Task<IList<User>> GetUserInfoById(string id)
+        {
+            var currentInfo = await this.context.Users.Where(s => s.Id == id).ToListAsync();
+            return  currentInfo;
+            
         }
     }
 }

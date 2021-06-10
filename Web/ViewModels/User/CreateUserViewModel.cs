@@ -14,6 +14,7 @@ namespace Web.ViewModels
         [MaxLength(50, ErrorMessage = "Max Length 50")]
         public string Username { get; set; }
         public string Address { get; set; }
+
         [Required(ErrorMessage = "Required email")]
         [EmailAddress]
         public string Email { get; set; }

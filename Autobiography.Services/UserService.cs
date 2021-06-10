@@ -52,6 +52,12 @@ namespace Autobiography.Services
             return userSkill;
         }
 
+        public async Task<IList<User>> GetUserInfoById(string id)
+        {
+            var userInfo = await this.userRepository.GetUserInfoById(id);
+            return userInfo;
+        }
+
         public async Task<User> UpdateUserByIdAsync(string id, User user)
         {
            var updatedUser= await this.userRepository.UpdateUserAsync(id, user);

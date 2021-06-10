@@ -11,7 +11,6 @@ using Web.ViewModels;
 namespace Web.Controllers
 {
     [Authorize]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class EducationController : ControllerBase

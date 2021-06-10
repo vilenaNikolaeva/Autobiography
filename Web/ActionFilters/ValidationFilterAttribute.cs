@@ -18,7 +18,7 @@ namespace Web.ActionFilters
         public void OnActionExecuting(ActionExecutingContext context)
         {
             string tokenUserId = context.HttpContext.User.FindFirst("Id").Value;
-            string requestUserId = context.ActionArguments["id"].ToString();
+            string requestUserId = context.ActionArguments["Id"].ToString();
 
             if (tokenUserId != requestUserId)
             {

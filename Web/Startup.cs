@@ -25,6 +25,7 @@ namespace Web
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "My react app";
         public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
@@ -39,6 +40,16 @@ namespace Web
                 .AddEntityFrameworkStores<AutobiographyDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod(); ;
+                                  });
+            });
             // Adding Authentication  
             services.AddAuthentication(options =>
             {
@@ -114,6 +125,7 @@ namespace Web
 
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -133,8 +145,8 @@ namespace Web
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
+            app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();
 
