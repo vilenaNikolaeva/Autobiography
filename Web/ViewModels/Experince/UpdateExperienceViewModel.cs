@@ -15,6 +15,7 @@ namespace Web.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
+        public bool StillWork { get; set; }
         [Required]
         [MaxLength(200)]
         public string CompanyName { get; set; }
