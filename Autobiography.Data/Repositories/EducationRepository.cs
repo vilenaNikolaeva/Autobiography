@@ -39,6 +39,7 @@ namespace Autobiography.Data.Repositories
 
             educationForUpdate.StartDate = education.StartDate;
             educationForUpdate.EndDate = education.EndDate;
+            educationForUpdate.Present = education.Present;
             educationForUpdate.University = education.University;
             educationForUpdate.Title = education.Title;
             educationForUpdate.Description = education.Description;

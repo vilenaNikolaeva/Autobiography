@@ -15,6 +15,7 @@ namespace Web.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
+        public bool Present { get; set; }
         [Required]
         [MaxLength(250)]
         public string University { get; set; }
