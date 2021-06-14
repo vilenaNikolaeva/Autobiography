@@ -43,7 +43,6 @@ namespace Autobiography.Data.Repositories
             experienceForUpdate.Description = experience.Description;
             experienceForUpdate.StartDate =experience.StartDate;
             experienceForUpdate.EndDate = experience.EndDate;
-            experienceForUpdate.StillWork = experience.StillWork;
 
             this.context.Experiences.Update(experienceForUpdate);
             await this.context.SaveChangesAsync();

@@ -16,9 +16,6 @@ namespace Autobiography.Domain
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
-
-        public bool StillWork { get; set; }
-
         [Required]
         [MaxLength(200)]
         public string CompanyName { get; set; }

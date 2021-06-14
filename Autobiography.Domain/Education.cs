@@ -17,7 +17,6 @@ namespace Autobiography.Domain
         [DisplayFormat(DataFormatString = "{yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
-        public bool Present { get; set; }
         [Required]
         [MaxLength(250)]
         public string University { get; set; }
