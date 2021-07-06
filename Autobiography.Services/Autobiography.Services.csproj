@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Autobiography.Common\Autobiography.Common.csproj" />
     <ProjectReference Include="..\Autobiography.Data\Autobiography.Data.csproj" />
     <ProjectReference Include="..\Autobiography.Domain\Autobiography.Domain.csproj" />
   </ItemGroup>

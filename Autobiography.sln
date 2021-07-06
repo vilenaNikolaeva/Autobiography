@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobiography.Domain", "Aut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobiography.Data", "Autobiography.Data\Autobiography.Data.csproj", "{26286612-96CA-4781-8FBB-38016FF63450}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobiography.Common", "Autobiography.Common\Autobiography.Common.csproj", "{1FC7B062-C300-42B9-8F87-9E9DA5215D7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{26286612-96CA-4781-8FBB-38016FF63450}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26286612-96CA-4781-8FBB-38016FF63450}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26286612-96CA-4781-8FBB-38016FF63450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC7B062-C300-42B9-8F87-9E9DA5215D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC7B062-C300-42B9-8F87-9E9DA5215D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC7B062-C300-42B9-8F87-9E9DA5215D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC7B062-C300-42B9-8F87-9E9DA5215D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

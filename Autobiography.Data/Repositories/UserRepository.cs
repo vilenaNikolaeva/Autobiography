@@ -1,8 +1,10 @@
 ﻿using Autobiography.Data.Repositories.Interfaces;
 using Autobiography.Domain;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,11 +56,12 @@ namespace Autobiography.Data.Repositories
         {
             var userForUpdate = await this.FindByIdAsync(id);
 
-            userForUpdate.UserName = user.UserName;
-            userForUpdate.Email = user.Email;
-            userForUpdate.Link = user.Link;
-            userForUpdate.Address = user.Address;
-            userForUpdate.Description = user.Description;
+            userForUpdate.ImageSrc = user.ImageSrc ?? userForUpdate.ImageSrc;
+            userForUpdate.UserName = user.UserName ?? userForUpdate.UserName;
+            userForUpdate.Email = user.Email ?? userForUpdate.Email;
+            userForUpdate.Link = user.Link ?? userForUpdate.Link;
+            userForUpdate.Address = user.Address ?? userForUpdate.Address;
+            userForUpdate.Description = user.Description ?? userForUpdate.Description;
 
             this.context.Users.Update(userForUpdate);
             await this.context.SaveChangesAsync();

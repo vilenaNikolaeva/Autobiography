@@ -1,39 +1,52 @@
-﻿using Autobiography.Domain;
+﻿using Autobiography.Common;
+using Autobiography.Domain;
 using Autobiography.Services.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Web.ActionFilters;
 using Web.ViewModels;
+using Web.ViewModels.User;
 
 namespace Web.Controllers
 {
     [Authorize]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    //[ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService userService;
-        private readonly IMapper mapper;
-        public UserController(IUserService userService, IMapper mapper)
-        {
-            this.userService = userService;
-            this.mapper = mapper;
-        }
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IUserImageService _userImageService;
 
+        public UserController(IUserService userService, IMapper mapper, IWebHostEnvironment hostEnvironment, IUserImageService userImageService)
+        {
+            this._userService = userService;
+            this._mapper = mapper;
+            this._hostEnvironment = hostEnvironment;
+            this._userImageService = userImageService;
+        }
+        [AllowAnonymous]
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetUserInfoById(string id)
         {
-            var userInfo = await this.userService.GetUserInfoById(id);
-            var userInfoModel = this.mapper.Map<IList<CreateUserViewModel>>(userInfo);
-
+            var userInfo =  await this._userService.GetUserInfoById(id);
+            var userInfoModel = this._mapper.Map<IList<CreateUserViewModel>>(userInfo);
+          
             return Ok(userInfoModel);
         }
 
@@ -44,8 +57,8 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetLanguagesByUserIdAsync(string id)
         {
-            var languages = await this.userService.GetLanguagesByUserIdAsync(id);
-            var languageModel = this.mapper.Map<IList<LanguageViewModel>>(languages);
+            var languages = await this._userService.GetLanguagesByUserIdAsync(id);
+            var languageModel = this._mapper.Map<IList<LanguageViewModel>>(languages);
 
             return Ok(languageModel);
         }
@@ -56,8 +69,8 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetSkillsByUserIdAsync(string id)
         {
-            var skills = await this.userService.GetSkillByUserIdAsync(id);
-            var skillModel = this.mapper.Map<IList<SkillViewModel>>(skills);
+            var skills = await this._userService.GetSkillByUserIdAsync(id);
+            var skillModel = this._mapper.Map<IList<SkillViewModel>>(skills);
             return Ok(skillModel);
         }
 
@@ -67,8 +80,8 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetExperiencesByUserIdAsync(string id)
         {
-            var experiences = await this.userService.GetExperienceByUserIdAsync(id);
-            var experienceModel = this.mapper.Map<IList<ExperienceViewModel>>(experiences);
+            var experiences = await this._userService.GetExperienceByUserIdAsync(id);
+            var experienceModel = this._mapper.Map<IList<ExperienceViewModel>>(experiences);
             return Ok(experienceModel);
         }
 
@@ -78,34 +91,45 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetEducationByUserIdAsync(string id)
         {
-            var educations = await this.userService.GetEducationByUserIdAsync(id);
-            var educationModel = this.mapper.Map<IList<EducationViewModel>>(educations);
+            var educations = await this._userService.GetEducationByUserIdAsync(id);
+            var educationModel = this._mapper.Map<IList<EducationViewModel>>(educations);
             return Ok(educationModel);
         }
-
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteUserByIdAsync(string id)
         {
-            await this.userService.DeleteUserByIdAsync(id);
+            this._userImageService.DeleteImage(id,id);
+            await this._userService.DeleteUserByIdAsync(id);
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> UpdateUserByIdAsync(string id, UpdateUserViewModel user)
+        public async Task<ActionResult<UpdateUserViewModel>> UpdateUserByIdAsync(string id, [FromForm] UpdateUserViewModel userModel)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            var userModel = this.mapper.Map<User>(user);
-            await this.userService.UpdateUserByIdAsync(id, userModel);
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (userModel.ImageFile != null)
+            {
+                var imageName = await this._userImageService.SaveImage(userModel.ImageFile, id, _hostEnvironment.ContentRootPath);
+                var imageSrc = $"{Request.Scheme}://{Request.Host}{Request.PathBase}/{Constants.IMAGES_FOLDER}/{imageName}";
+                userModel.ImageSrc = imageSrc;
+                userModel.ImageFile = null;
+            }
+
+            var user = this._mapper.Map<User>(userModel);
+            await this._userService.UpdateUserByIdAsync(id, user);
+            return Ok(userModel);
         }
     }
 }

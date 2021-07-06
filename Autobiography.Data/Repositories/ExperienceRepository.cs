@@ -38,9 +38,10 @@ namespace Autobiography.Data.Repositories
         public async Task<Experience> UpdateExperienceAsync(int id, Experience experience)
         {
             var experienceForUpdate = await this.FindByIdAsync(id);
-           
-            experienceForUpdate.CompanyName = experience.CompanyName;
-            experienceForUpdate.Description = experience.Description;
+
+            experienceForUpdate.JobTitle = experience.JobTitle ?? experienceForUpdate.JobTitle;
+            experienceForUpdate.CompanyName = experience.CompanyName ?? experienceForUpdate.CompanyName;
+            experienceForUpdate.Description = experience.Description ?? experienceForUpdate.Description;
             experienceForUpdate.StillWork = experience.StillWork;
             experienceForUpdate.StartDate =experience.StartDate;
             experienceForUpdate.EndDate = experience.EndDate;

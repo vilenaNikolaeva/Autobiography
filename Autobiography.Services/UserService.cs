@@ -1,9 +1,7 @@
 ﻿using Autobiography.Data.Repositories.Interfaces;
 using Autobiography.Domain;
 using Autobiography.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Autobiography.Services
@@ -59,8 +57,8 @@ namespace Autobiography.Services
         }
 
         public async Task<User> UpdateUserByIdAsync(string id, User user)
-        {
-           var updatedUser= await this.userRepository.UpdateUserAsync(id, user);
+        {            
+            var updatedUser= await this.userRepository.UpdateUserAsync(id, user);
             return updatedUser;
         }
     }

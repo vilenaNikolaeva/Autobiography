@@ -1,10 +1,8 @@
-﻿using Autobiography.Domain;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Web.Attributes;
 
 namespace Web.ViewModels
 {
@@ -19,6 +17,11 @@ namespace Web.ViewModels
         public string Email { get; set; }
         public string Link { get; set; }
         public string Description { get; set; }
-       
+        public string ImageSrc { get; set; }
+        
+        [Required]
+        [MaxFileSize(10*1024*1024)]
+        public IFormFile ImageFile { get; set; }
     }
+
 }

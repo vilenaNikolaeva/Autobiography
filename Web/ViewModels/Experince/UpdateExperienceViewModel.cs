@@ -18,6 +18,9 @@ namespace Web.ViewModels
         public bool StillWork { get; set; }
         [Required]
         [MaxLength(200)]
+        public string JobTitle { get; set; }
+        [Required]
+        [MaxLength(200)]
         public string CompanyName { get; set; }
         public string Description { get; set; }
     }
