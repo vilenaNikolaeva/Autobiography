@@ -13,7 +13,9 @@ namespace Web.ViewModels
 {
     public class CreateUserViewModel 
     {
-       [Required(ErrorMessage = "Required name")]
+        public bool IsItPublic { get; set; }
+
+        [Required(ErrorMessage = "Required name")]
         [MaxLength(50, ErrorMessage = "Max Length 50")]
         public string Username { get; set; }
         public string Address { get; set; }
@@ -27,6 +29,6 @@ namespace Web.ViewModels
         [Required]
         [MaxFileSize(10 * 1024 * 1024)]
         public IFormFile ImageFile { get; set; }
-
+      
     }
 }

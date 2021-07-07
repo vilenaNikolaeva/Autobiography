@@ -4,14 +4,16 @@ using Autobiography.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Autobiography.Data.Migrations
 {
     [DbContext(typeof(AutobiographyDbContext))]
-    partial class AutobiographyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210706163619_Add_IsItPublic_ToUser")]
+    partial class Add_IsItPublic_ToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

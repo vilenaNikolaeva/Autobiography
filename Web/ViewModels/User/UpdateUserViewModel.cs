@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Web.Attributes;
@@ -8,6 +9,7 @@ namespace Web.ViewModels
 {
     public class UpdateUserViewModel 
     {
+        public bool IsItPublic { get; set; }
         [Required(ErrorMessage = "Required name")]
         [MaxLength(50, ErrorMessage = "Max Length 50")]
         public string Username { get; set; }
@@ -22,6 +24,8 @@ namespace Web.ViewModels
         [Required]
         [MaxFileSize(10*1024*1024)]
         public IFormFile ImageFile { get; set; }
+       
+    
     }
 
 }
