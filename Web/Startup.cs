@@ -17,11 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Text;
-using System.Web.Http.Filters;
 using Web.ActionFilters;
-using Web.AutoMapper;
-using Web.ViewModels;
-using Web.ViewModels.User;
 
 namespace Web
 {
@@ -119,6 +115,7 @@ namespace Web
             services.AddTransient<IExperienceService, ExperienceService>();
             services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<IUserImageService, UserImageService>();
+            services.AddTransient<IUserResumeService, UserResumeService>();
 
             //Repositories
             services.AddTransient<ILanguageRepository, LanguageRepository>();
@@ -126,6 +123,7 @@ namespace Web
             services.AddTransient<IEducationRepository, EducationRepository>();
             services.AddTransient<IExperienceRepository, ExperienceRepository>();
             services.AddTransient<ISkillRepository, SkillRepository>();
+            services.AddTransient<IUserResumeRepository, UserResumeRepository>();
             
             services.AddAutoMapper(typeof(Startup));
             //services.AddControllersWithViews();

@@ -6,16 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using Web.ActionFilters;
 using Web.ViewModels;
-using Web.ViewModels.User;
 
 namespace Web.Controllers
 {
@@ -37,7 +31,6 @@ namespace Web.Controllers
             this._hostEnvironment = hostEnvironment;
             this._userImageService = userImageService;
         }
-        [AllowAnonymous]
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -95,7 +88,7 @@ namespace Web.Controllers
             var educationModel = this._mapper.Map<IList<EducationViewModel>>(educations);
             return Ok(educationModel);
         }
-        [AllowAnonymous]
+        
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -107,7 +100,6 @@ namespace Web.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -126,10 +118,17 @@ namespace Web.Controllers
                 userModel.ImageSrc = imageSrc;
                 userModel.ImageFile = null;
             }
+            else if(userModel.ImageSrc== null)
+            {
+                var folder = Path.Combine(_hostEnvironment.ContentRootPath, Constants.IMAGES_FOLDER);
+                this._userImageService.DeleteImage(folder,id);
+                userModel.ImageSrc = null;
+                userModel.ImageFile = null;
+            }
 
             var user = this._mapper.Map<User>(userModel);
             await this._userService.UpdateUserByIdAsync(id, user);
             return Ok(userModel);
         }
     }
-}
+} 

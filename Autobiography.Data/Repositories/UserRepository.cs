@@ -1,12 +1,8 @@
 ﻿using Autobiography.Data.Repositories.Interfaces;
 using Autobiography.Domain;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Autobiography.Data.Repositories
@@ -21,8 +17,11 @@ namespace Autobiography.Data.Repositories
         {
             return await this.context.Users.FindAsync(id);
         }
-
-
+        public async Task<IList<User>> GetUserInfoById(string id)
+        {
+            var currentInfo = await this.context.Users.Where(s => s.Id == id).ToListAsync();
+            return currentInfo;
+        }
         public async Task<User> CreateUserAsync(User newUser)
         {
             await this.context.Users.AddAsync(newUser);
@@ -34,13 +33,11 @@ namespace Autobiography.Data.Repositories
             var educations = await this.context.Educations.Where(e => e.UserId == id).ToListAsync();
             return educations;
         }
-
         public async Task<IList<Experience>> GetExperienceByUserIdAsync(string id)
         {
             var experiences = await this.context.Experiences.Where(e => e.UserId == id).ToListAsync();
             return experiences;
         }
-
         public async Task<IList<Language>> GetLanguagesByUserIdAsync(string id)
         {
             var languages = await this.context.Languages.Where(l => l.UserId == id).ToListAsync();
@@ -51,7 +48,6 @@ namespace Autobiography.Data.Repositories
             var skills = await this.context.Skills.Where(s => s.UserId == id).ToListAsync();
             return skills;
         }
-
         public async Task<User> UpdateUserAsync(string id, User user)
         {
             var userForUpdate = await this.FindByIdAsync(id);
@@ -74,11 +70,5 @@ namespace Autobiography.Data.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<IList<User>> GetUserInfoById(string id)
-        {
-            var currentInfo = await this.context.Users.Where(s => s.Id == id).ToListAsync();
-            return  currentInfo;
-            
-        }
     }
 }

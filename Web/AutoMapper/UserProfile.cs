@@ -1,7 +1,6 @@
 ﻿using Autobiography.Domain;
 using AutoMapper;
 using Web.ViewModels;
-using Web.ViewModels.User;
 
 namespace Web.AutoMapper
 {

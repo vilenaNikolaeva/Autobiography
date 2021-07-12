@@ -1,9 +1,5 @@
 ﻿using Autobiography.Data.Repositories.Interfaces;
 using Autobiography.Domain;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Autobiography.Data.Repositories

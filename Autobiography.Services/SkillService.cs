@@ -1,9 +1,6 @@
 ﻿using Autobiography.Data.Repositories.Interfaces;
 using Autobiography.Domain;
 using Autobiography.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Autobiography.Services

@@ -1,10 +1,5 @@
-﻿using Abp.Domain.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Autobiography.Domain
 {

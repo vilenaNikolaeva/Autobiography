@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Web.Attributes;
 
 namespace Web.ViewModels
@@ -21,7 +18,6 @@ namespace Web.ViewModels
         public string Description { get; set; }
         public string ImageSrc { get; set; }
         
-        [Required]
         [MaxFileSize(10*1024*1024)]
         public IFormFile ImageFile { get; set; }
        
