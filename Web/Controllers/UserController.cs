@@ -31,6 +31,7 @@ namespace Web.Controllers
             this._hostEnvironment = hostEnvironment;
             this._userImageService = userImageService;
         }
+
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -42,7 +43,6 @@ namespace Web.Controllers
           
             return Ok(userInfoModel);
         }
-
 
         [HttpGet]
         [Route("{id}/languages")]
@@ -118,7 +118,7 @@ namespace Web.Controllers
                 userModel.ImageSrc = imageSrc;
                 userModel.ImageFile = null;
             }
-            else if(userModel.ImageSrc== null)
+            else if(userModel.ImageSrc== "null")
             {
                 var folder = Path.Combine(_hostEnvironment.ContentRootPath, Constants.IMAGES_FOLDER);
                 this._userImageService.DeleteImage(folder,id);

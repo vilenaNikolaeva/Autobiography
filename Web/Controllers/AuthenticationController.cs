@@ -39,7 +39,7 @@ namespace Web.Controllers
 
                 var authClaims = new List<Claim>
                 {
-                   new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("Id", user.Id)
                 };
@@ -72,12 +72,19 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult> Register([FromBody] RegisterUserViewModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterUserViewModel model)        
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
+            var userEmailExist = await userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
             {
-                return BadRequest();
+                ModelState.AddModelError("error", "The user already exists!");
+                return BadRequest(ModelState);
+            }
+            else if (userEmailExist != null)
+            {
+                ModelState.AddModelError("error", "The user with the same email already exists!");
+                return BadRequest(ModelState);
             }
 
             User user = new User()
@@ -93,8 +100,7 @@ namespace Web.Controllers
                 return BadRequest(result.Errors);
             }
 
-            return Ok();
+            return await Login(new LoginUserViewModel() { Username = model.Username, Password = model.Password });            
         }
-
     }
 }

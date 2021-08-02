@@ -52,9 +52,10 @@ namespace Autobiography.Data.Repositories
         {
             var userForUpdate = await this.FindByIdAsync(id);
             userForUpdate.IsItPublic = user.IsItPublic;
-            userForUpdate.ImageSrc = user.ImageSrc ?? userForUpdate.ImageSrc;
+            userForUpdate.ImageSrc = user.ImageSrc;
             userForUpdate.UserName = user.UserName ?? userForUpdate.UserName;
             userForUpdate.Email = user.Email ?? userForUpdate.Email;
+            userForUpdate.Phone = user.Phone;
             userForUpdate.Link = user.Link ?? userForUpdate.Link;
             userForUpdate.Address = user.Address ?? userForUpdate.Address;
             userForUpdate.Description = user.Description ?? userForUpdate.Description;

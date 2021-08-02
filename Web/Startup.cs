@@ -142,9 +142,10 @@ namespace Web
                     context.Database.EnsureCreated();
                 }
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
 
             app.UseStaticFiles(new StaticFileOptions
             {

@@ -10,6 +10,7 @@ namespace Autobiography.Domain
         public string ImageSrc { get; set; }
         public string Address { get; set; }
         public string Link { get; set; }
+        public string Phone { get; set; }
         public string Description { get; set; }
         public bool IsItPublic { get; set; }
         public ICollection<Language> Languages { get; set; }
