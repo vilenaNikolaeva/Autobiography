@@ -42,7 +42,7 @@ namespace Autobiography.Data.Repositories
 
             this.context.Educations.Update(educationForUpdate);
             await this.context.SaveChangesAsync();
-            return education;
+            return educationForUpdate;
         }
     }
 }
