@@ -13,7 +13,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     //[ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
@@ -38,9 +38,9 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetUserInfoById(string id)
         {
-            var userInfo =  await this._userService.GetUserInfoById(id);
+            var userInfo = await this._userService.GetUserInfoById(id);
             var userInfoModel = this._mapper.Map<IList<CreateUserViewModel>>(userInfo);
-          
+
             return Ok(userInfoModel);
         }
 
@@ -88,14 +88,14 @@ namespace Web.Controllers
             var educationModel = this._mapper.Map<IList<EducationViewModel>>(educations);
             return Ok(educationModel);
         }
-        
+
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteUserByIdAsync(string id)
         {
-            this._userImageService.DeleteImage(id,id);
+            this._userImageService.DeleteImage(id, id);
             await this._userService.DeleteUserByIdAsync(id);
             return Ok();
         }
@@ -118,10 +118,10 @@ namespace Web.Controllers
                 userModel.ImageSrc = imageSrc;
                 userModel.ImageFile = null;
             }
-            else if(userModel.ImageSrc== "null")
+            else if (userModel.ImageSrc == "null")
             {
                 var folder = Path.Combine(_hostEnvironment.ContentRootPath, Constants.IMAGES_FOLDER);
-                this._userImageService.DeleteImage(folder,id);
+                this._userImageService.DeleteImage(folder, id);
                 userModel.ImageSrc = null;
                 userModel.ImageFile = null;
             }
@@ -131,4 +131,4 @@ namespace Web.Controllers
             return Ok(userModel);
         }
     }
-} 
+}
