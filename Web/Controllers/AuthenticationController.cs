@@ -32,14 +32,14 @@ namespace Web.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
         {
-            var user = await userManager.FindByNameAsync(model.Username);
+            var user = await userManager.FindByEmailAsync(model.Email);
             if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await userManager.GetRolesAsync(user);
 
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Name, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("Id", user.Id)
                 };
@@ -63,7 +63,8 @@ namespace Web.Controllers
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    userId = user.Id
+                    userId = user.Id,
+                    name = user.UserName
                 });
             }
 
@@ -100,7 +101,7 @@ namespace Web.Controllers
                 return BadRequest(result.Errors);
             }
 
-            return await Login(new LoginUserViewModel() { Username = model.Username, Password = model.Password });            
+            return await Login(new LoginUserViewModel() { Email = model.Email, Password = model.Password });            
         }
     }
 }
