@@ -30,7 +30,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserViewModel model)
+        public async Task<IActionResult> Login( LoginUserViewModel model)
         {
             var user = await userManager.FindByEmailAsync(model.Email);
             if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
@@ -73,7 +73,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserViewModel model)        
+        public async Task<IActionResult> Register( RegisterUserViewModel model)        
         {
             var userExists = await userManager.FindByNameAsync(model.Username);
             var userEmailExist = await userManager.FindByEmailAsync(model.Email);

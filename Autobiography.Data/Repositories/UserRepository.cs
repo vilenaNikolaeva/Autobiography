@@ -54,12 +54,15 @@ namespace Autobiography.Data.Repositories
             userForUpdate.IsItPublic = user.IsItPublic;
             userForUpdate.ImageSrc = user.ImageSrc;
             userForUpdate.UserName = user.UserName ?? userForUpdate.UserName;
+            userForUpdate.JobTitle = user.JobTitle;
             userForUpdate.Email = user.Email ?? userForUpdate.Email;
             userForUpdate.Phone = user.Phone;
             userForUpdate.Link = user.Link ?? userForUpdate.Link;
             userForUpdate.Address = user.Address ?? userForUpdate.Address;
             userForUpdate.Description = user.Description ?? userForUpdate.Description;
-           
+            userForUpdate.CvTemplate = user.CvTemplate;
+            userForUpdate.ClTemplate = user.ClTemplate;
+
             this.context.Users.Update(userForUpdate);
             await this.context.SaveChangesAsync();
             return userForUpdate;
