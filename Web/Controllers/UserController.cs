@@ -104,7 +104,7 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UpdateUserViewModel>> UpdateUserByIdAsync(string id, [FromForm] UpdateUserViewModel userModel)
+        public async Task<ActionResult<UpdateUserViewModel>> UpdateUserByIdAsync(string id, UpdateUserViewModel userModel)
         {
             if (!ModelState.IsValid)
             {

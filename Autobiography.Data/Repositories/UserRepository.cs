@@ -58,6 +58,7 @@ namespace Autobiography.Data.Repositories
             userForUpdate.Email = user.Email ?? userForUpdate.Email;
             userForUpdate.Phone = user.Phone;
             userForUpdate.Link = user.Link ?? userForUpdate.Link;
+            userForUpdate.OtherConnections = user.OtherConnections;
             userForUpdate.Address = user.Address ?? userForUpdate.Address;
             userForUpdate.Description = user.Description ?? userForUpdate.Description;
             userForUpdate.CvTemplate = user.CvTemplate;

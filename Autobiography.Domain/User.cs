@@ -11,6 +11,7 @@ namespace Autobiography.Domain
         public string Address { get; set; }
         public string JobTitle { get; set; }
         public string Link { get; set; }
+        public string OtherConnections { get; set; }
         public string Phone { get; set; }
         public string Description { get; set; }
         public bool IsItPublic { get; set; }

@@ -25,5 +25,8 @@ namespace Web.ViewModels.User
         public string CvTemplate { get; set; }
         public string ClTemplate { get; set; }
 
+        [Required(ErrorMessage = "Password is required")]
+        public string Password { get; set; }
+
     }
 }

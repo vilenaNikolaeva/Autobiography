@@ -5,6 +5,8 @@ namespace Web.ViewModels
 {
     public class UpdateExperienceViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{yyyy/MM/dd}", ApplyFormatInEditMode = true)]
