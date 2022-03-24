@@ -9,12 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Web.ActionFilters;
 using Web.ViewModels;
 
 namespace Web.Controllers
 {
-    //[Authorize]
-    //[ServiceFilter(typeof(ValidationFilterAttribute))]
+    [Authorize]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
