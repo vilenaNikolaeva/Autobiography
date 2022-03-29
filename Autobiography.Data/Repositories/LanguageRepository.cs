@@ -33,7 +33,7 @@ namespace Autobiography.Data
         {
             var LanguageForUpdate = await this.FindByIdAsync(id);
 
-            LanguageForUpdate.Name = language.Name;
+            LanguageForUpdate.Title = language.Title;
 
             this.context.Languages.Update(LanguageForUpdate);
             await this.context.SaveChangesAsync();

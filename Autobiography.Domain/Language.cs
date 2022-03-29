@@ -8,7 +8,7 @@ namespace Autobiography.Domain
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Title { get; set; }
         [Required]
         [Range(1, 10)]
         public int Level { get; set; }
