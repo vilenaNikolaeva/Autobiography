@@ -126,6 +126,7 @@ namespace Web
             services.AddTransient<IUserResumeRepository, UserResumeRepository>();
             
             services.AddAutoMapper(typeof(Startup));
+            services.AddControllers().AddNewtonsoftJson();
             //services.AddControllersWithViews();
 
         }
