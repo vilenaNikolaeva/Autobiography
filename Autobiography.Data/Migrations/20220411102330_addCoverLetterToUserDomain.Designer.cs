@@ -4,14 +4,16 @@ using Autobiography.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Autobiography.Data.Migrations
 {
     [DbContext(typeof(AutobiographyDbContext))]
-    partial class AutobiographyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220411102330_addCoverLetterToUserDomain")]
+    partial class addCoverLetterToUserDomain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,22 +37,13 @@ namespace Autobiography.Data.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Presentation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RecepientCompany")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RecepientDepartment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RecepientEmail")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RecepientName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RecepientPhone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Regardless")

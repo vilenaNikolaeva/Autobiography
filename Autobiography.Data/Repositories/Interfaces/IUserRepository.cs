@@ -15,8 +15,5 @@ namespace Autobiography.Data.Repositories.Interfaces
         public Task<IList<Skill>> GetSkillByUserIdAsync(string id);
         public Task<IList<Education>> GetEducationByUserIdAsync(string id);
         public Task<IList<Experience>> GetExperienceByUserIdAsync(string id);
-
-        
-
     }
 }

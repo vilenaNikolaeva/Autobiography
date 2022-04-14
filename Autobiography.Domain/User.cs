@@ -17,6 +17,7 @@ namespace Autobiography.Domain
         public bool IsItPublic { get; set; }
         public string CvTemplate { get; set; }
         public string ClTemplate { get; set; }
+        public CoverLetter CoverLetter { get; set; } 
         public ICollection<Language> Languages { get; set; }
         public ICollection<Skill> Skills { get; set; }
         public ICollection<Education> Educations { get; set; }

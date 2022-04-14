@@ -116,6 +116,7 @@ namespace Web
             services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<IUserImageService, UserImageService>();
             services.AddTransient<IUserResumeService, UserResumeService>();
+            services.AddTransient<ICoverLetterService, CoverLetterService>();
 
             //Repositories
             services.AddTransient<ILanguageRepository, LanguageRepository>();
@@ -124,7 +125,9 @@ namespace Web
             services.AddTransient<IExperienceRepository, ExperienceRepository>();
             services.AddTransient<ISkillRepository, SkillRepository>();
             services.AddTransient<IUserResumeRepository, UserResumeRepository>();
-            
+            services.AddTransient<ICoverLetterRepository, CoverLetterRepository>();
+
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers().AddNewtonsoftJson();
             //services.AddControllersWithViews();

@@ -9,13 +9,14 @@ namespace Autobiography.Services
     {
         private readonly IEducationRepository educationRepository;
 
-        public async Task<Education> FindByIdAsync(int id)
-        {
-            return await this.educationRepository.FindByIdAsync(id);
-        }
+
         public EducationService(IEducationRepository educationRepository)
         {
             this.educationRepository = educationRepository;
+        }
+        public async Task<Education> FindByIdAsync(int id)
+        {
+            return await this.educationRepository.FindByIdAsync(id);
         }
 
         public async Task<Education> CreateEducationAsync(Education newEducation)

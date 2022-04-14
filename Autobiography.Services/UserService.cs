@@ -21,10 +21,6 @@ namespace Autobiography.Services
             return newUser;
         }
 
-        public async Task DeleteUserByIdAsync(string id)
-        {
-            await this.userRepository.DeleteUserAsync(id);
-        }
 
         public async Task<IList<Education>> GetEducationByUserIdAsync(string id)
         {
@@ -55,11 +51,15 @@ namespace Autobiography.Services
             var userInfo = await this.userRepository.GetUserInfoById(id);
             return userInfo;
         }
-
         public async Task<User> UpdateUserByIdAsync(string id, User user)
         {            
             var updatedUser= await this.userRepository.UpdateUserAsync(id, user);
             return updatedUser;
         }
+        public async Task DeleteUserByIdAsync(string id)
+        {
+            await this.userRepository.DeleteUserAsync(id);
+        }
+
     }
 }

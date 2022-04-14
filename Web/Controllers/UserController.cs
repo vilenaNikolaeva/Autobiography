@@ -11,11 +11,12 @@ using System.IO;
 using System.Threading.Tasks;
 using Web.ActionFilters;
 using Web.ViewModels;
+using Web.ViewModels.CoverLetter;
 
 namespace Web.Controllers
 {
-    [Authorize]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    //[Authorize]
+    //[ServiceFilter(typeof(ValidationFilterAttribute))]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -89,6 +90,8 @@ namespace Web.Controllers
             var educationModel = this._mapper.Map<IList<EducationViewModel>>(educations);
             return Ok(educationModel);
         }
+    
+
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
